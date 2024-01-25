@@ -1,0 +1,18 @@
+<!-- quiz_app/templates/create_question.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Question</title>
+</head>
+<body>
+    <h2>Create Question</h2>
+    <form method="post" action="{% url 'create_question' %}">
+        {% csrf_token %}
+        <label for="question_text">Question Text:</label>
+        <input type="text" name="question_text" required>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

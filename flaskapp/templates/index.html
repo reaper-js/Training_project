@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+    <style>
+        .success-message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Questions</h1>
+    {% if message %}
+        <div class="success-message">{{ message }}</div>
+    {% else %}
+        <form method="post" action="/submit-answers">
+            {% for question in questions %}
+            <div>
+                <strong>{{ question.question_text }}</strong>
+                {% if question.question_type == 'mcq' %}
+                    <div>
+                        <input type="radio" id="option1_{{question.question_id}}" name="answer_{{question.question_id}}" value="{{ question.mcq_option_1 }}">
+                        <label for="option1_{{question.question_id}}">{{ question.mcq_option_1 }}</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="option2_{{question.question_id}}" name="answer_{{question.question_id}}" value="{{ question.mcq_option_2 }}">
+                        <label for="option2_{{question.question_id}}">{{ question.mcq_option_2 }}</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="option3_{{question.question_id}}" name="answer_{{question.question_id}}" value="{{ question.mcq_option_3 }}">
+                        <label for="option3_{{question.question_id}}">{{ question.mcq_option_3 }}</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="option4_{{question.question_id}}" name="answer_{{question.question_id}}" value="{{ question.mcq_option_4 }}">
+                        <label for="option4_{{question.question_id}}">{{ question.mcq_option_4 }}</label>
+                    </div>
+                {% elif question.question_type == 'yes_no' %}
+                    <div>
+                        <input type="radio" id="yes_{{question.question_id}}" name="answer_{{question.question_id}}" value="Yes">
+                        <label for="yes_{{question.question_id}}">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no_{{question.question_id}}" name="answer_{{question.question_id}}" value="No">
+                        <label for="no_{{question.question_id}}">No</label>
+                    </div>
+                {% elif question.question_type == 'descriptive' %}
+                    <div>
+                        <textarea id="desc_{{question.question_id}}" name="answer_{{question.question_id}}"></textarea>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+</body>
+</html>
