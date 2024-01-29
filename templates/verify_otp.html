@@ -4,48 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
-    <style>
-        /* Style the form container */
-        .form-container {
-            margin: 20px;
-        }
-
-        /* Style the OTP input field */
-        #otpname {
-            padding: 10px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        /* Style the button */
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        /* Change the button color on hover */
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
 </head>
 <body>
-    <div class="form-container">
-        <h4>Verify OTP</h4>
-        <form method="POST">
+    <div class="container">
+        <p>
+            Verify OTP
+        </p>
+        <form method="POST", class="form-container">
             <input type="text" id="otpname" name="otpname" placeholder="Enter OTP">
             <button type="submit" name="verify_otp">Verify OTP</button>
             <!-- Hidden input field to store the email for verification -->
             <input type="hidden" name="emailname" value="{{ email }}">
         </form>
+        
+    </div>
+    <div  class="Footer">
+        <footer> &#169; Created and Managed by Incedo Inc</footer>
+
     </div>
 </body>
 </html>
