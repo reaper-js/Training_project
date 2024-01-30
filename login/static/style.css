@@ -1,0 +1,85 @@
+/* Basic alignment and coloring CSS */
+
+/* Align text to the center */
+.center-align {
+    text-align: center;
+}
+
+/* Align text to the left */
+.left-align {
+    text-align: left;
+}
+
+/* Align text to the right */
+.right-align {
+    text-align: right;
+}
+
+/* Text color */
+.text-color {
+    color: #333333; /* Change this to your preferred color */
+}
+
+/* Background color */
+.background-color {
+    background-color: #f0f0f0; /* Change this to your preferred background color */
+}
+
+/* Example class for a heading */
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000; /* Black color for heading text */
+    text-align: center; /* Center align the heading */
+}
+
+/* Example class for a paragraph */
+.paragraph {
+    font-size: 16px;
+    color: #333333; /* Dark grey color for paragraph text */
+    text-align: justify; /* Justify align the paragraph */
+}
+
+/* Button styling */
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Text box styling */
+.text-box {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Radio button styling */
+.radio-button {
+    margin: 10px;
+}
+
+.centered-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Adjust the width as needed */
+    border-collapse: collapse;
+}
+
+.centered-table th, .centered-table td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+}
+
+.centered-table th {
+    background-color: #f2f2f2;
+}
