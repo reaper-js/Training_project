@@ -1,8 +1,22 @@
 from flask import Flask,render_template,request,redirect,url_for,session
 from flask_mail import Mail,Message
 import os,random
+import pyodbc  # db
+
 
 app=Flask(__name__)
+
+# Update the connection string with your own database details
+connection_string = 'Driver={SQL Server};Server=tcp:server29janpraneet.database.windows.net,1433;Database=db29jan;Uid=dbadmin;Pwd={Localhost@1234567};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+def get_db_connection():
+    try:
+        conn = pyodbc.connect(connection_string)
+        return conn
+    except Exception as e:
+        print(f"Error connecting to the database: {str(e)}")
+        return None
+
+
 app.secret_key = '28janrandom'
 app.secret_key = os.urandom(24)  
 
@@ -16,8 +30,12 @@ mail=Mail(app)
 
 otp_storage=[11234,33243,43554,66765,76558,87575,64646,87876,12343,54366]
 
+@app.route('/')
+def homepage():
+    # Render the home page
+    return render_template('homepage.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         email = request.form['emailname']
@@ -32,6 +50,36 @@ def index():
         return redirect(url_for('verify_otp', user_type = user_type))
     return render_template('index.html')
 
+@app.route('/registration_page')
+def registration_page():
+    # Render the home page
+    return render_template('registration_page.html')
+
+@app.route('/register', methods=['POST'])
+def register():
+    email = request.form.get('email')
+    fullname = request.form.get('fullname')
+    phone = request.form.get('phone')
+    conn = get_db_connection()
+    parts = email.split('@')
+    username = parts[0]
+    if conn:
+        try:
+            cursor = conn.cursor()
+            query = "INSERT INTO table_29th (email, fullname, phone, username) VALUES (?, ?, ?, ?)"
+            cursor.execute(query, (email, fullname, phone, username))
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            message = 'Registration Successful!'
+            return render_template('registration_page', message=message)
+        except Exception as e:
+            print(f"Error during registration: {str(e)}")
+            conn.rollback()
+            return render_template('registration_page.html', message='Email ID already registered. Please go to Login Page.')
+    else:
+        return render_template('registration_page', message='Unable to connect to the database.')
 
 @app.route('/verify_otp', methods=['GET', 'POST'])
 def verify_otp():

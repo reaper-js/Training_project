@@ -35,6 +35,11 @@ body {
     padding-top: 1rem;
 }
 
+#sucess-msg{
+    font-size: 1rem;
+}
+
+
 
 /* #user_type {
     width: 100%;
@@ -52,7 +57,7 @@ p   {
     font-size: 2rem;
     align-items: center;
 }
-#emailname, #otpname, #user_type{
+#emailname, #otpname, #user_type, #email, #fullname, #phone{
     width: 100%;
     padding: 10px;
     background-color: #ffffffd5;
