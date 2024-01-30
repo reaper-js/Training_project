@@ -16,20 +16,27 @@
     </head>
 
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        
         <div class="container">
 
             <p>Login</p> 
             
            <form method='POST', class="form-container">
-                <select id="userType" name="userType">
+                <!-- <label for="dropdown"></label>
+                <select name="dropdown" id="dropdown">
+                    <option value="learner">Learner</option>
+                    <option value="trainer">Trainer</option>
+                </select> -->
+                <select name="user_type" id="user_type">
                     <option value="learner">Learner</option>
                     <option value="trainer">Trainer</option>
                 </select>
+                <!-- <select id="userType" name="userType">
+                    <option value="learner" id="learner">Learner</option>
+                    <option value="trainer" id="trainer">Trainer</option>
+                </select> -->
                 <input type="email" id="emailname" name="emailname"  placeholder="Enter your email">
-                <button id="otp-button">SEND OTP</button>
+                <button id="otp-button" type="submit">SEND OTP</button>
     
             </form>
 

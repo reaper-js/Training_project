@@ -23,12 +23,13 @@ def index():
         email = request.form['emailname']
         otp = random.choice(otp_storage)
         session['otp'] = otp
+        user_type = request.form['user_type']
 
         msg = Message("Your OTP", sender='bbonzana@gmail.com', recipients=[email])
         msg.body = f"Your OTP is: {otp}"
         mail.send(msg)
 
-        return redirect(url_for('verify_otp'))
+        return redirect(url_for('verify_otp', user_type = user_type))
     return render_template('index.html')
 
 
@@ -38,8 +39,13 @@ def verify_otp():
         if request.method == 'POST':
             entered_otp = int(request.form['otpname'])
             stored_otp = session['otp']
+            user_type = request.args.get('user_type')
+            # print(user_type)
             if entered_otp == stored_otp:
-                return 'OTP verified. You are logged in!'
+                if user_type == 'learner':
+                    return redirect(url_for('learner_dashboard'))
+                elif user_type == 'trainer':
+                    return redirect(url_for('trainer_dashboard'))
             else:
                 return 'Invalid OTP. Please try again.'
         else:
@@ -47,6 +53,16 @@ def verify_otp():
     else:
         return redirect(url_for('index'))
 
+@app.route('/learner_dashboard')
+def learner_dashboard():
+    return render_template('learner_dashboard.html')
+
+@app.route('/trainer_dashboard')
+def trainer_dashboard():
+    return render_template('trainer_dashboard.html')
+
+if __name__ == '__main__':
+    app.run(debug=True, host= "0.0.0.0", port=80)
 
 
 
@@ -79,5 +95,4 @@ def verify_otp():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
