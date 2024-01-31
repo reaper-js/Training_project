@@ -16,8 +16,6 @@ def get_db_connection():
         print(f"Error connecting to the database: {str(e)}")
         return None
 
-def generate_random_6_digit_number():
-    return random.randint(100000, 999999)
 
 app.secret_key = '28janrandom'
 app.secret_key = os.urandom(24)  
@@ -30,7 +28,7 @@ app.config['MAIL_USE_TLS'] = False #true
 app.config['MAIL_USE_SSL'] = True #false
 mail=Mail(app)
 
-# otp_storage=[11234,33243,43554,66765,76558,87575,64646,87876,12343,54366]
+otp_storage=[11234,33243,43554,66765,76558,87575,64646,87876,12343,54366]
 
 @app.route('/')
 def homepage():
@@ -41,7 +39,7 @@ def homepage():
 def index():
     if request.method == 'POST':
         email = request.form['emailname']
-        otp = generate_random_6_digit_number()
+        otp = random.choice(otp_storage)
         session['otp'] = otp
         user_type = request.form['user_type']
 
@@ -111,10 +109,13 @@ def learner_dashboard():
 def trainer_dashboard():
     return render_template('trainer_dashboard.html')
 
+
+@app.route('/about_page')
+def about_page():
+    return render_template('about_page.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host= "0.0.0.0", port=80)
-
-
 
 
 # def home():
@@ -142,7 +143,3 @@ if __name__ == '__main__':
 #                 return 'otp session expired'
             
 #     return render_template('index.html')
-
-
-
-

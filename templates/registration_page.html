@@ -9,8 +9,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
 </head>
 <body>
+    <div class="container1">
+        <p class="headline">Project</p>
+        <nav>
+        <a href="{{ url_for('homepage') }}" class="navigation-tabs">Home</a>
+        <a href="{{ url_for('registration_page') }}"  class="navigation-tabs">Register</a>
+        <a href="{{ url_for('index') }}"  class="navigation-tabs">Login</a> <!-- index to login  -->
+        <a href="{{ url_for('about_page') }}" class="navigation-tabs">About</a>
+        </nav>
+    </div>
     <div class="container">
-        <p>User Registration</p>
+        <p><b>User Registration</b></p>
         <form action="{{ url_for('register') }}" method="post", class="form-container">
         <input type="email" id="email" name="email" placeholder="E-Mail" required>
         <input type="text" id="fullname" name="fullname" placeholder="Full Name" required>
@@ -23,8 +32,8 @@
             <p id="success-msg">{{ message }}</p>
         {% endif %}
     </div>
-    <!-- <div class="Footer">
-        <footer> &#169; Created and Managed by Incedo Inc</footer>
-    </div> -->
+        <div class="footer">
+            &copy; 2024 Incedo Inc | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
 </body>
 </html>
